@@ -9,25 +9,49 @@ module TsvBuddy
   def take_tsv(tsv)
     tsv_lines = []
     yml_results = []
+    header = []
   
     tsv_lines = tsv.split("\n")
     header = tsv_lines[0].split("\t")
-    #header.map!(&:chomp)
 
     tsv_lines.shift
     tsv_lines.each do |line|
       value = line.split("\t")
       record = Hash.new(0)
-      header.each_index { |index| record[header[index]] = value[index].chomp }
+      header.each_index { |index| record[header[index]] = value[index].chomp}
       yml_results << record
     end
     @data = yml_results
-    @data
   end
 
   # to_tsv: converts @data into tsv string
   # returns: String in TSV format
   def to_tsv
+   first_hash = @data[0]
+   tsv_string = ''
 
-  end
+   first_hash.each_with_index do |(key,_), index|
+
+      if first_hash.length - 1 == index
+          tsv_string << key
+        else
+          tsv_string << key + "\t"
+      end
+    end
+   tsv_string << "\n"
+   
+   @data.each do |line|
+    line.each_with_index do |(_,value), index|
+
+      if line.length - 1 == index
+          tsv_string << value
+        else
+          tsv_string << value + "\t"
+      end
+    end
+     tsv_string << "\n"
+   end
+   tsv_string
+ end
+
 end
