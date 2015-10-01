@@ -1,4 +1,4 @@
-## FlipFlap HW
+## FlipFlap HW - Nicole Weatherburne
 
 ###Overview
 
