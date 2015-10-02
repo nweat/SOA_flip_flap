@@ -1,9 +1,9 @@
 require_relative 'tsv_buddy'
-
+# Testing functionalities
 class Tester
- include TsvBuddy
+  include TsvBuddy
 end
 
 test_run = Tester.new
-test_run.take_tsv(File.read('./data/test.tsv'))
-puts test_run.to_tsv
+test_run.take_tsv(File.read('./data/survey.tsv'))
+test_run.to_tsv
