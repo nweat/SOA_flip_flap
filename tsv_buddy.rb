@@ -25,23 +25,19 @@ module TsvBuddy
   # to_tsv: converts @data into tsv string
   # returns: String in TSV format
   def to_tsv
-   tsv_string = ''
-   heading = ''
-   record = ''
+    tsv_string = ''
+    heading = ''
 
-   @data[0].each_key { |key| heading << key + "\t" }
-   tsv_string << heading.strip
-   tsv_string << "\n"
-   
-   0.upto(@data.length - 1) do |index| 
-    puts @data[index]
-    record = '';
+    @data[0].each_key { |key| heading << key + "\t" }
+    tsv_string << heading.strip
+    tsv_string << "\n"
 
-   @data[index].each_value { |val| record.concat(val + "\t") }
-   tsv_string.concat(record.strip)
-   tsv_string.concat("\n")
- end
-tsv_string
- end
-
+    0.upto(@data.length - 1) do |index|
+      record = ''
+      @data[index].each_value { |val| record << val + "\t" }
+      tsv_string << record.strip
+      tsv_string << "\n"
+    end
+    tsv_string
+  end
 end
