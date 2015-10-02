@@ -7,10 +7,8 @@ module TsvBuddy
   # take_tsv: converts a String with TSV data into @data
   # parameter: tsv - a String in TSV format
   def take_tsv(tsv)
-    tsv_lines = []
     yml_results = []
     header = []
-  
     tsv_lines = tsv.split("\n")
     header = tsv_lines[0].split("\t")
 
@@ -18,7 +16,7 @@ module TsvBuddy
     tsv_lines.each do |line|
       value = line.split("\t")
       record = Hash.new(0)
-      header.each_index { |index| record[header[index]] = value[index].chomp}
+      header.each_index { |index| record[header[index]] = value[index].chomp }
       yml_results << record
     end
     @data = yml_results
@@ -27,31 +25,23 @@ module TsvBuddy
   # to_tsv: converts @data into tsv string
   # returns: String in TSV format
   def to_tsv
-   first_hash = @data[0]
    tsv_string = ''
+   heading = ''
+   record = ''
 
-   first_hash.each_with_index do |(key,_), index|
-
-      if first_hash.length - 1 == index
-          tsv_string << key
-        else
-          tsv_string << key + "\t"
-      end
-    end
+   @data[0].each_key { |key| heading << key + "\t" }
+   tsv_string << heading.strip
    tsv_string << "\n"
    
-   @data.each do |line|
-    line.each_with_index do |(_,value), index|
+   0.upto(@data.length - 1) do |index| 
+    puts @data[index]
+    record = '';
 
-      if line.length - 1 == index
-          tsv_string << value
-        else
-          tsv_string << value + "\t"
-      end
-    end
-     tsv_string << "\n"
-   end
-   tsv_string
+   @data[index].each_value { |val| record.concat(val + "\t") }
+   tsv_string.concat(record.strip)
+   tsv_string.concat("\n")
+ end
+tsv_string
  end
 
 end
