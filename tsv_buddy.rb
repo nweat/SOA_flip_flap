@@ -27,14 +27,15 @@ module TsvBuddy
   def to_tsv
     tsv_string = ''
     heading = ''
+    data = @data
 
-    @data[0].each_key { |key| heading << key + "\t" }
+    data[0].each_key { |key| heading << key + "\t" }
     tsv_string << heading.strip
     tsv_string << "\n"
 
-    0.upto(@data.length - 1) do |index|
+    0.upto(data.length - 1) do |index|
       record = ''
-      @data[index].each_value { |val| record << val + "\t" }
+      data[index].each_value { |val| record << val + "\t" }
       tsv_string << record.strip
       tsv_string << "\n"
     end
