@@ -1,5 +1,6 @@
 require 'yaml'
 require_relative 'tsv_buddy'
+
 # FlipFlap
 class FlipFlap
   include TsvBuddy
